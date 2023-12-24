@@ -1,2 +1,1 @@
-# memos
-memos project ci/cd pipeline
+# Smart memos project README
