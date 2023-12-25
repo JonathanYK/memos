@@ -10,7 +10,7 @@ def test_send_json(test_client, json_msg_for_testing=None):
     THEN check the response is valid
     """
 
-    gen_memo_id = test_memos_id_generator_page(test_client=test_client, return_memo_id=True)
+    gen_memo_id = test_memo_id_generator_page(test_client=test_client, return_memo_id=True)
 
     sample_memo_json = {
     "message": "pytest message check!",
@@ -54,7 +54,7 @@ def test_send_json_wrong_keys(test_client, json_msg_for_testing=None):
     THEN check the response is valid
     """
 
-    gen_memo_id = test_memos_id_generator_page(test_client=test_client, return_memo_id=True)
+    gen_memo_id = test_memo_id_generator_page(test_client=test_client, return_memo_id=True)
 
     # 'additional' key is wrong, and 'level' is missing
     sample_memo_json = {
@@ -135,7 +135,7 @@ def test_memos_id_without_msg(test_client):
     x will be pulled from the db, after posting JSON memo id
     THEN check the response is valid
     """
-    gen_memo_id = test_memos_id_generator_page(test_client=test_client, return_memo_id=True)
+    gen_memo_id = test_memo_id_generator_page(test_client=test_client, return_memo_id=True)
 
     # get response message of gen_memo_id:
     response = test_client.get(f'/memo_msg?memo_id={gen_memo_id}')
