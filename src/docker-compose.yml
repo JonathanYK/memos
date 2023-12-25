@@ -1,0 +1,35 @@
+version: '3'
+services:
+
+    nginx_app:
+        image: nginx:latest
+        depends_on:
+            - flask_app
+        volumes:
+            - './nginx/nginx.conf:/etc/nginx/nginx.conf'
+        ports:
+            - 8090:80
+        networks:
+            - backend
+
+    flask_app:
+        image: jonathanyk/memos-project:githubactions
+        ports:
+            - 8081:5000
+        expose:
+            - 5000
+        networks:
+            - backend
+
+    tf:
+        image: hashicorp/terraform:1.1.7
+        volumes:
+            - .:/infra
+        environment:
+            - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+            - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+            - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
+
+
+networks:
+    backend:

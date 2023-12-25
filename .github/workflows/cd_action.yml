@@ -1,0 +1,24 @@
+name: cd_action
+
+on:
+  workflow_run:
+    workflows: ["ci_action"]
+    types:
+      - completed
+
+jobs:
+
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+    - name: Pull docker image
+      run: sudo docker pull ${{ secrets.DOCKER_HUB_USER }}/memos-project:githubactions
+    - name: Delete old container
+      run: sudo docker rm -f memos-project-container || true
+    - name: Run container
+      run: sudo docker run -d -p 8081:5000 --name memos-project-container ${{ secrets.DOCKER_HUB_USER }}/memos-project:githubactions
+
+      
+  
