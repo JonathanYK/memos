@@ -41,6 +41,6 @@ home_blueprint = Blueprint('home', __name__)
 
 @home_blueprint.route("/")
 def home():
-    return "Main memos project page"
+    return "Main memos project page!!!"
 
     
